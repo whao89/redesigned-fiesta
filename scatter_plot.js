@@ -30,6 +30,8 @@ function scatterPlot3d( parent )
   // color brewer
   var o = d3.scale.ordinal()
     .range(colorbrewer.Set1[7]);
+  console.log(o(0))
+  console.log(o(1))
   console.log(o)
 
   // Helper functions for initializeAxis() and drawAxis()
