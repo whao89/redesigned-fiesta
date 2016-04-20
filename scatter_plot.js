@@ -18,7 +18,8 @@ function scatterPlot3d( parent )
      .attr( "orientation", [-0.5, 1, 0.2, 1.12*Math.PI/4])
      .attr( "position", [8, 4, 15])
 
-  var rows = initializeDataGrid();
+  //var rows = initializeDataGrid();
+  var rows = [];
   var axisRange = [0, 10];
   var scales = [];
   var initialDuration = 0;
@@ -156,18 +157,11 @@ function scatterPlot3d( parent )
   }
 
   function initializeDataGrid() {
-    var rows = [];
-    d3.csv("test.csv", function(d) {
-      return {
-	LF1: +d.LF1, // convert "Year" column to Date
-	LF2: +d.LF2,
-	LF3: +d.LF3,
-	length: +d.Length // convert "Length" column to number
-      };
-    }, function(error, rows) {
-      console.log(rows);
+    d3.csv("test.csv", function(data) {
+      data.forEach(function(d)){
+	rows.push({x: +d.LF1, y: +d.LF2, z: +d.LF2, poplabel: +d.poplabel});
+      }
     });
-    return rows;
   }
 
   function updateData() {
