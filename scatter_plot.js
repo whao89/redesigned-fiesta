@@ -20,7 +20,7 @@ function scatterPlot3d( parent )
 
   //var rows = initializeDataGrid();
   var rows = [];
-  var axisRange = [0, 10];
+  var axisRange = [0, 8];
   var scales = [];
   var initialDuration = 0;
   var defaultDuration = 800;
@@ -111,7 +111,7 @@ function scatterPlot3d( parent )
   function drawAxis( axisIndex, key, duration ) {
 
     var scale = d3.scale.linear()
-      .domain( [-5,5] ) // demo data range
+      .domain( [-3,5] ) // demo data range
       .range( axisRange )
     
     scales[axisIndex] = scale;
@@ -163,7 +163,7 @@ function scatterPlot3d( parent )
   function initializeDataGrid() {
     d3.csv("Laz_pc.csv", function(data) {
       data.forEach(function(d){
-	rows.push({PC1: +d.PC1, PC2: +d.PC2, PC3: +d.PC3, poplabel: +d.poplabel});
+	rows.push({PC1: +d.PC1*50, PC2: +d.PC2*50, PC3: +d.PC3*50, poplabel: +d.poplabel});
       })
       console.log(rows)
     });
