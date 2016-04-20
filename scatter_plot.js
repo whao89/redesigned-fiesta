@@ -30,9 +30,9 @@ function scatterPlot3d( parent )
   // color brewer
   var o = d3.scale.ordinal()
     .range(colorbrewer.Set1[7]);
-  console.log(o(0))
-  console.log(o(1))
-  console.log(o)
+  //console.log(o(0))
+  //console.log(o(1))
+  //console.log(o)
 
   // Helper functions for initializeAxis() and drawAxis()
   function axisName( name, axisIndex ) {
@@ -150,7 +150,9 @@ function scatterPlot3d( parent )
        //.attr("radius", sphereRadius)
 
     datapoints.selectAll("shape appearance material")
-        .attr("diffuseColor", o(row["poplabel"]) ) // color/lighting
+        .attr("diffuseColor", function(row){
+	  return(o(row["poplabel"]))
+	  }) // color/lighting
 
     datapoints.transition().ease(ease).duration(duration)
         .attr("translation", function(row) { 
