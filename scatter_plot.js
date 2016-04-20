@@ -58,6 +58,15 @@ function scatterPlot3d( parent )
     initializeAxis(0);
     initializeAxis(1);
     initializeAxis(2);
+    
+    var pops = ["Africa", "America", "CentralAsiaSiberia", "EastAsia", "Oceania", "SouthAsia", "WestEurasia"];
+    var theData = [0, 1, 2, 3, 4, 5, 6];
+    d3.select("body").selectAll("p")\
+      .data(theData)
+      .enter()
+      .append("p")
+      .text(function(d){return(pops[d])});
+      
   }
 
   function initializeAxis( axisIndex )
