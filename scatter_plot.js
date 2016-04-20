@@ -25,7 +25,7 @@ function scatterPlot3d( parent )
   var initialDuration = 0;
   var defaultDuration = 800;
   var ease = 'linear';
-  var axisKeys = ["LF1", "LF2", "LF3"]
+  var axisKeys = ["PC1", "PC2", "PC3"]
   
   // color brewer
   var o = d3.scale.ordinal()
@@ -36,7 +36,7 @@ function scatterPlot3d( parent )
 
   // Helper functions for initializeAxis() and drawAxis()
   function axisName( name, axisIndex ) {
-    return ['LF1','LF2','LF3'][axisIndex] + name;
+    return ['PC1','PC2','PC3'][axisIndex] + name;
   }
 
   function constVecWithAxisValue( otherValue, axisValue, axisIndex ) {
@@ -94,7 +94,7 @@ function scatterPlot3d( parent )
      .append("shape")
      .call(makeSolid)
 
-   var labelFontSize = 0.6;
+   var labePContSize = 0.6;
 
    newAxisLabelShape
      .append("text")
@@ -102,7 +102,7 @@ function scatterPlot3d( parent )
        .attr("solid", "true")
        .attr("string", key)
     .append("fontstyle")
-       .attr("size", labelFontSize)
+       .attr("size", labePContSize)
        .attr("family", "SANS")
        .attr("justify", "END MIDDLE" )
   }
@@ -161,9 +161,9 @@ function scatterPlot3d( parent )
   }
 
   function initializeDataGrid() {
-    d3.csv("test.csv", function(data) {
+    d3.csv("Laz_pc.csv", function(data) {
       data.forEach(function(d){
-	rows.push({LF1: +d.LF1, LF2: +d.LF2, LF3: +d.LF3, poplabel: +d.poplabel});
+	rows.push({PC1: +d.PC1, PC2: +d.PC2, PC3: +d.PC3, poplabel: +d.poplabel});
       })
       console.log(rows)
     });
@@ -181,3 +181,5 @@ function scatterPlot3d( parent )
   initializePlot();
   setInterval( updateData, defaultDuration );
 }
+
+//Africa America CentralAsiaSiberia EastAsia Oceania SouthAsia WestEurasia
