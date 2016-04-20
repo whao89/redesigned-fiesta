@@ -1,4 +1,5 @@
-// borrowed from http://bl.ocks.org/hlvoorhees/5986172
+// original source from http://bl.ocks.org/hlvoorhees/5986172
+// butchered by Wei Hao in April 2016
 
 // Create a 3d scatter plot within d3 selection parent.
 function scatterPlot3d( parent )
@@ -24,10 +25,15 @@ function scatterPlot3d( parent )
   var defaultDuration = 800;
   var ease = 'linear';
   var axisKeys = ["x", "y", "z"]
+  
+  // color brewer
+  var o = d3.scale.ordinal()
+    .domain(["foo", "bar", "baz"])
+    .range(colorbrewer.Set1[7]);
 
   // Helper functions for initializeAxis() and drawAxis()
   function axisName( name, axisIndex ) {
-    return ['x','y','z'][axisIndex] + name;
+    return ['LF1','LF2','LF3'][axisIndex] + name;
   }
 
   function constVecWithAxisValue( otherValue, axisValue, axisIndex ) {
@@ -110,70 +116,6 @@ function scatterPlot3d( parent )
     var numTicks = 8;
     var tickSize = 0.1;
     var tickFontSize = 0.5;
-
-/*
-    // ticks along each axis
-    var ticks = scene.selectAll( "."+axisName("Tick", axisIndex) )
-       .data( scale.ticks( numTicks ));
-    var newTicks = ticks.enter()
-      .append("transform")
-        .attr("class", axisName("Tick", axisIndex));
-    newTicks.append("shape").call(makeSolid)
-      .append("box")
-        .attr("size", tickSize + " " + tickSize + " " + tickSize);
-    // enter + update
-    ticks.transition().duration(duration)
-      .attr("translation", function(tick) { 
-         return constVecWithAxisValue( 0, scale(tick), axisIndex ); })
-    ticks.exit().remove();
-
-    // tick labels
-    var tickLabels = ticks.selectAll("billboard shape text")
-      .data(function(d) { return [d]; });
-    var newTickLabels = tickLabels.enter()
-      .append("billboard")
-         .attr("axisOfRotation", "0 0 0")     
-      .append("shape")
-      .call(makeSolid)
-    newTickLabels.append("text")
-      .attr("string", scale.tickFormat(10))
-      .attr("solid", "true")
-      .append("fontstyle")
-        .attr("size", tickFontSize)
-        .attr("family", "SANS")
-        .attr("justify", "END MIDDLE" );
-    tickLabels // enter + update
-      .attr("string", scale.tickFormat(10))
-    tickLabels.exit().remove();
-
-    // base grid lines
-    if (axisIndex==0 || axisIndex==2) {
-
-      var gridLines = scene.selectAll( "."+axisName("GridLine", axisIndex))
-         .data(scale.ticks( numTicks ));
-      gridLines.exit().remove();
-      
-      var newGridLines = gridLines.enter()
-        .append("transform")
-          .attr("class", axisName("GridLine", axisIndex))
-          .attr("rotation", axisIndex==0 ? [0,1,0, -Math.PI/2] : [0,0,0,0])
-        .append("shape")
-
-      newGridLines.append("appearance")
-        .append("material")
-          .attr("emissiveColor", "gray")
-      newGridLines.append("polyline2d");
-
-      gridLines.selectAll("shape polyline2d").transition().duration(duration)
-        .attr("lineSegments", "0 0, " + axisRange[1] + " 0")
-
-      gridLines.transition().duration(duration)
-         .attr("translation", axisIndex==0
-            ? function(d) { return scale(d) + " 0 0"; }
-            : function(d) { return "0 0 " + scale(d); }
-          )
-    }
-*/
   }
 
   // Update the data points (spheres) and stems.
@@ -205,51 +147,21 @@ function scatterPlot3d( parent )
        //.attr("radius", sphereRadius)
 
     datapoints.selectAll("shape appearance material")
-        .attr("diffuseColor", 'steelblue' )
+        .attr("diffuseColor", 'firebrick' ) // color/lighting
 
     datapoints.transition().ease(ease).duration(duration)
         .attr("translation", function(row) { 
           return x(row[axisKeys[0]]) + " " + y(row[axisKeys[1]]) + " " + z(row[axisKeys[2]])})
 
-    // Draw a stem from the x-z plane to each sphere at elevation y.
-    // This convention was chosen to be consistent with x3d primitive ElevationGrid. 
-    /*
-    var stems = scene.selectAll(".stem").data( rows );
-    stems.exit().remove();
-
-    var newStems = stems.enter()
-      .append("transform")
-        .attr("class", "stem")
-      .append("shape");
-    newStems
-      .append("appearance")
-      .append("material")
-        .attr("emissiveColor", "gray")
-    newStems
-      .append("polyline2d")
-        .attr("lineSegments", function(row) { return "0 1, 0 0"; })
-
-    stems.transition().ease(ease).duration(duration)
-        .attr("translation", 
-           function(row) { return x(row[axisKeys[0]]) + " 0 " + z(row[axisKeys[2]]); })
-        .attr("scale",
-           function(row) { return [1, y(row[axisKeys[1]])]; })
-  */
   }
 
   function initializeDataGrid() {
     var rows = [];
-    // Follow the convention where y(x,z) is elevation.
-    for (var x=-5; x<=5; x+=1) {
-      for (var z=-5; z<=5; z+=1) {
-        rows.push({x: x, y: 0, z: z});
-      }
-    }
-    d3.csv("example.csv", function(d) {
+    d3.csv("test.csv", function(d) {
       return {
-	year: new Date(+d.Year, 0, 1), // convert "Year" column to Date
-	make: d.Make,
-	model: d.Model,
+	LF1: +d.LF1, // convert "Year" column to Date
+	LF2: +d.LF2,
+	LF3: +d.LF3,
 	length: +d.Length // convert "Length" column to number
       };
     }, function(error, rows) {
