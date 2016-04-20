@@ -25,7 +25,7 @@ function scatterPlot3d( parent )
   var initialDuration = 0;
   var defaultDuration = 800;
   var ease = 'linear';
-  var axisKeys = ["x", "y", "z"]
+  var axisKeys = ["LF1", "LF2", "LF3"]
   
   // color brewer
   var o = d3.scale.ordinal()
@@ -150,7 +150,7 @@ function scatterPlot3d( parent )
        //.attr("radius", sphereRadius)
 
     datapoints.selectAll("shape appearance material")
-        .attr("diffuseColor", 'firebrick' ) // color/lighting
+        .attr("diffuseColor", o(row["poplabel"]) ) // color/lighting
 
     datapoints.transition().ease(ease).duration(duration)
         .attr("translation", function(row) { 
@@ -161,7 +161,7 @@ function scatterPlot3d( parent )
   function initializeDataGrid() {
     d3.csv("test.csv", function(data) {
       data.forEach(function(d){
-	rows.push({x: +d.LF1, y: +d.LF2, z: +d.LF2, poplabel: +d.poplabel});
+	rows.push({LF1: +d.LF1, LF2: +d.LF2, LF3: +d.LF3, poplabel: +d.poplabel});
       })
       console.log(rows)
     });
