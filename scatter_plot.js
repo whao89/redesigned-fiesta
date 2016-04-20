@@ -29,8 +29,8 @@ function scatterPlot3d( parent )
   
   // color brewer
   var o = d3.scale.ordinal()
-    .domain(["foo", "bar", "baz"])
     .range(colorbrewer.Set1[7]);
+  console.log(o)
 
   // Helper functions for initializeAxis() and drawAxis()
   function axisName( name, axisIndex ) {
@@ -161,6 +161,7 @@ function scatterPlot3d( parent )
       data.forEach(function(d){
 	rows.push({x: +d.LF1, y: +d.LF2, z: +d.LF2, poplabel: +d.poplabel});
       })
+      console.log(rows)
     });
   }
 
