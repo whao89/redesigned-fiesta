@@ -16,7 +16,7 @@ function scatterPlot3d( parent )
      .attr( "centerOfRotation", [4, 4, 4])
      .attr( "fieldOfView", [-5, -5, 13, 13])
      .attr( "orientation", [-0.5, 1, 0.2, 1.12*Math.PI/4])
-     .attr( "position", [8, 4, 15])
+     .attr( "position", [8, 8, 8])
 
   //var rows = initializeDataGrid();
   var rows = [];
