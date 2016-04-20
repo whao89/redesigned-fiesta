@@ -158,9 +158,9 @@ function scatterPlot3d( parent )
 
   function initializeDataGrid() {
     d3.csv("test.csv", function(data) {
-      data.forEach(function(d)){
+      data.forEach(function(d){
 	rows.push({x: +d.LF1, y: +d.LF2, z: +d.LF2, poplabel: +d.poplabel});
-      }
+      })
     });
   }
 
