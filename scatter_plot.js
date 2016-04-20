@@ -65,7 +65,8 @@ function scatterPlot3d( parent )
       .data(theData)
       .enter()
       .append("p")
-      .text(function(d){return(pops[d])});
+      .text(function(d){return(pops[d])})
+      .style('fill', function(d){return(p(d))});
       
   }
 
