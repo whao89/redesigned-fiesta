@@ -130,7 +130,7 @@ function scatterPlot3d( parent )
     }
 
     var x = scales[0], y = scales[1], z = scales[2];
-    var sphereRadius = 0.05;
+    var sphereRadius = 0.02;
 
     // Draw a sphere at each x,y,z coordinate.
     var datapoints = scene.selectAll(".datapoint").data( rows );
