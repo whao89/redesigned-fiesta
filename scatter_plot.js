@@ -61,7 +61,7 @@ function scatterPlot3d( parent )
     
     var pops = ["Africa", "America", "CentralAsiaSiberia", "EastAsia", "Oceania", "SouthAsia", "WestEurasia"];
     var theData = [0, 1, 2, 3, 4, 5, 6];
-    d3.select("body").selectAll("p")\
+    d3.select("body").selectAll("p")
       .data(theData)
       .enter()
       .append("p")
