@@ -163,7 +163,7 @@ function scatterPlot3d( parent )
   function initializeDataGrid() {
     d3.csv("Laz_pc.csv", function(data) {
       data.forEach(function(d){
-	rows.push({PC1: +d.PC1*10, PC2: +d.PC2*10, PC3: +d.PC3*10, poplabel: +d.poplabel});
+	rows.push({PC1: +d.PC1*50, PC2: +d.PC2*50, PC3: +d.PC3*50, poplabel: +d.poplabel});
       })
       console.log(rows)
     });
