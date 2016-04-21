@@ -1,1 +1,1 @@
-whao89.github.io/redesigned-fiesta/index.html
+http://whao89.github.io/redesigned-fiesta/index.html
